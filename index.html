@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MT Reniew - Download</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: #1a1a1a;
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      color: #ffffff;
+    }
+    
+    /* 8-bit sky gradient */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, 
+        #2a2a2a 0%,
+        #3a3a3a 20%,
+        #4a4a4a 40%,
+        #5a5a5a 60%,
+        #6a6a6a 80%,
+        #7a7a7a 100%
+      );
+      z-index: -3;
+    }
+    
+    /* Pixelated effect */
+    body::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        repeating-linear-gradient(0deg, 
+          rgba(255,255,255,0.03) 0px, 
+          rgba(255,255,255,0.03) 2px, 
+          transparent 2px, 
+          transparent 4px),
+        repeating-linear-gradient(90deg, 
+          rgba(255,255,255,0.03) 0px, 
+          rgba(255,255,255,0.03) 2px, 
+          transparent 2px, 
+          transparent 4px);
+      z-index: -2;
+    }
+    
+    /* 8-bit clouds */
+    .cloud {
+      position: absolute;
+      background: #ffffff;
+      z-index: -1;
+      opacity: 0.8;
+    }
+    
+    .cloud::before,
+    .cloud::after {
+      content: '';
+      position: absolute;
+      background: #ffffff;
+    }
+    
+    /* Cloud 1 - Large */
+    .cloud1 {
+      width: 100px;
+      height: 20px;
+      top: 15%;
+      left: -120px;
+      animation: cloudMove1 15s infinite linear;
+    }
+    
+    .cloud1::before {
+      width: 50px;
+      height: 20px;
+      top: -10px;
+      left: 10px;
+    }
+    
+    .cloud1::after {
+      width: 60px;
+      height: 20px;
+      top: -10px;
+      right: 15px;
+    }
+    
+    /* Cloud 2 - Medium */
+    .cloud2 {
+      width: 80px;
+      height: 16px;
+      top: 25%;
+      right: -100px;
+      animation: cloudMove2 20s infinite linear;
+    }
+    
+    .cloud2::before {
+      width: 40px;
+      height: 16px;
+      top: -8px;
+      left: 15px;
+    }
+    
+    .cloud2::after {
+      width: 30px;
+      height: 16px;
+      top: -8px;
+      right: 10px;
+    }
+    
+    /* Cloud 3 - Small */
+    .cloud3 {
+      width: 60px;
+      height: 12px;
+      top: 35%;
+      left: -80px;
+      animation: cloudMove3 12s infinite linear;
+    }
+    
+    .cloud3::before {
+      width: 30px;
+      height: 12px;
+      top: -6px;
+      left: 10px;
+    }
+    
+    .cloud3::after {
+      width: 25px;
+      height: 12px;
+      top: -6px;
+      right: 5px;
+    }
+    
+    /* Cloud 4 - Large bottom */
+    .cloud4 {
+      width: 120px;
+      height: 24px;
+      top: 70%;
+      right: -140px;
+      animation: cloudMove4 18s infinite linear;
+    }
+    
+    .cloud4::before {
+      width: 60px;
+      height: 24px;
+      top: -12px;
+      left: 20px;
+    }
+    
+    .cloud4::after {
+      width: 50px;
+      height: 24px;
+      top: -12px;
+      right: 25px;
+    }
+    
+    @keyframes cloudMove1 {
+      0% { left: -120px; }
+      100% { left: calc(100% + 120px); }
+    }
+    
+    @keyframes cloudMove2 {
+      0% { right: -100px; }
+      100% { right: calc(100% + 100px); }
+    }
+    
+    @keyframes cloudMove3 {
+      0% { left: -80px; }
+      100% { left: calc(100% + 80px); }
+    }
+    
+    @keyframes cloudMove4 {
+      0% { right: -140px; }
+      100% { right: calc(100% + 140px); }
+    }
+    
+    .card {
+      background: rgba(0, 0, 0, 0.8);
+      border: 4px solid #ffffff;
+      padding: 60px 50px;
+      text-align: center;
+      max-width: 450px;
+      width: 100%;
+      position: relative;
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+    }
+    
+    h1 {
+      font-size: 32px;
+      color: #ffffff;
+      margin-bottom: 40px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: 'Courier New', monospace;
+      text-shadow: 2px 2px 0px #000000;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      color: #000000;
+      padding: 20px 30px;
+      border: 4px solid #000000;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+      font-family: 'Courier New', monospace;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.1s ease;
+      image-rendering: pixelated;
+    }
+    
+    .btn:hover {
+      background: #000000;
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+    
+    .btn:active {
+      transform: translate(2px, 2px);
+    }
+    
+    /* 8-bit airplane */
+    .airplane {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 16px;
+      position: relative;
+      width: 32px;
+      height: 20px;
+      background: currentColor;
+      clip-path: polygon(
+        0% 50%,
+        20% 30%,
+        40% 30%,
+        45% 20%,
+        55% 20%,
+        60% 30%,
+        80% 30%,
+        100% 50%,
+        80% 70%,
+        60% 70%,
+        55% 80%,
+        45% 80%,
+        40% 70%,
+        20% 70%
+      );
+      animation: fly 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes fly {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-3px); }
+    }
+    
+    /* 8-bit stars in background */
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #ffffff;
+      animation: twinkle 3s infinite;
+    }
+    
+    .star:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+    .star:nth-child(2) { top: 20%; left: 80%; animation-delay: 1s; }
+    .star:nth-child(3) { top: 60%; left: 15%; animation-delay: 2s; }
+    .star:nth-child(4) { top: 80%; left: 90%; animation-delay: 0.5s; }
+    .star:nth-child(5) { top: 40%; left: 70%; animation-delay: 1.5s; }
+    
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    
+    @media (max-width: 600px) {
+      .card {
+        padding: 40px 30px;
+        border-width: 3px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      .btn {
+        padding: 16px 24px;
+        font-size: 12px;
+        border-width: 3px;
+      }
+      .airplane {
+        width: 24px;
+        height: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Moving clouds -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+  <div class="cloud cloud4"></div>
+  
+  <!-- Twinkling stars -->
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  
+  <div class="card">
+    <h1>MT Reniew</h1>
+    <a href="https://github.com/khebbabmohamed/thezip/releases/download/v1.0.0/mt_reniew_v1.zip" download class="btn">
+      <div class="airplane"></div>
+      Download for Windows
+    </a>
+  </div>
+</body>
+</html>
